@@ -1,0 +1,53 @@
+from typing import List
+
+class Tank:
+    manufacturer: str = "SteelArm"
+    country_of_origin: str = "Germany"
+    def __init__(self, model: str, serial_number: str, armor_thickness: float, firepower: int, crew_size: int) -> None:
+        self.model: str = model
+        self.serial_number: str = serial_number
+        self.armor_thickness: float = armor_thickness 
+        self.firepower: int = firepower  
+        self.crew_size: int = crew_size
+        self.current_speed: float = 80.0  
+        self.ammo_count: int = 1  
+    def move(self, speed: float) -> None:
+        self.current_speed = speed
+    def fire(self) -> str:
+        if self.ammo_count > 0:
+            self.ammo_count -= 1
+            return f"{self.model} произвел выстрел! Остаток боеприпасов: {self.ammo_count}."
+        else:
+            return "Боезапас исчерпан!"
+    def upgrade_armor(self, additional_thickness: float) -> None:
+        self.armor_thickness += additional_thickness
+    def get_status(self) -> str:
+        return (f"Модель: {self.model}\n"
+                f"Серийный №: {self.serial_number}\n"
+                f"Броня: {self.armor_thickness} мм\n"
+                f"Орудие: {self.firepower} мм\n"
+                f"Скорость: {self.current_speed} км/ч\n"
+                f"Боевое колесо: {self.crew_size} человек\n"
+                f"Боезапас: {self.ammo_count} снарядов")
+    def __repr__(self) -> str:
+        return f"Tank(model={self.model}, serial={self.serial_number})"
+t90 = Tank("T-90", "T-134", 650.0, 125, 3)
+leopard = Tank("Leopard 2", "L-58", 700.0, 120, 4)
+print('-------------------------')
+print(leopard.get_status())
+print('-------------------------')
+t90.move(60)
+print(t90.get_status())
+print('--------------------------------------------------')
+print(t90.fire())
+print(t90.fire())
+print('--------------------------------------------------')
+print(leopard.fire())
+print(leopard.fire())
+print('--------------------------------------------------')
+t90.upgrade_armor(50)
+print(t90.get_status())
+print('-------------------------')
+leopard.upgrade_armor(50)
+print(leopard.get_status())
+print('-------------------------')
