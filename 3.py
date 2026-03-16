@@ -1,0 +1,15 @@
+from typing import List
+def b_list(A: List[int], B: int = 2) -> List[int]:
+    return [A0 * B for A0 in A]
+b_lambda = lambda A, B: list(map(lambda A0: A0 * B, A))
+nums_input = input("Введите список чисел через пробел: ")
+A = [int(x) for x in nums_input.split()]
+B1 = input("Введите множитель (по умолчанию 2): ")
+if B1.strip() == "":
+    B = 2
+else:
+    B = int(B1)
+result_function = b_list(A, B)
+result_lambda = b_lambda(A, B)
+print("Результат (функция):", result_function)
+print("Результат (лямбда-функция):", result_lambda)
